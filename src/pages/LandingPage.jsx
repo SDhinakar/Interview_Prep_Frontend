@@ -36,7 +36,7 @@ const LandingPage = () => {
         {/* Header */}
         <header className="flex justify-between items-center py-6">
           <div className="text-xl font-extrabold bg-gradient-to-r from-[#FF9324] to-[#e99a4b] bg-clip-text text-transparent">
-            Interview Prep AI
+            PrepWiz
           </div>
           <div>
             {loading ? (
@@ -61,9 +61,9 @@ const LandingPage = () => {
         <div className="py-20">
           <div className="flex flex-col md:flex-row items-center max-w-6xl mx-auto">
             <div className="w-full md:w-1/2 md:pr-8 mb-8 md:mb-0">
-              <div className="inline-flex items-center gap-2 text-[13px] text-amber-600 font-semibold bg-amber-100 px-3 py-1 rounded-full border border-amber-300 mb-4">
+              {/* <div className="inline-flex items-center gap-2 text-[13px] text-amber-600 font-semibold bg-amber-100 px-3 py-1 rounded-full border border-amber-300 mb-4">
                 <LuSparkles /> AI Powered
-              </div>
+              </div> */}
               <h1 className="text-4xl md:text-5xl text-black font-medium leading-tight mb-6">
                 Ace Interviews with{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9324] to-[#e99a4b] font-semibold">
@@ -87,37 +87,6 @@ const LandingPage = () => {
             
           </div>
         </div>
-
-        {/* Features Section */}
-        {/* <div className="py-20">
-          <h2 className="text-2xl md:text-3xl font-semibold text-center mb-12">
-            Features That Make You Shine
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            {features.slice(0, 3).map((feature) => (
-              <div
-                key={feature.id}
-                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-amber-100/50"
-              >
-                <h3 className="text-lg font-semibold mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {features.slice(3, 5).map((feature) => (
-              <div
-                key={feature.id}
-                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-amber-100/50"
-              >
-                <h3 className="text-lg font-semibold mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        // </div>*/}
       </div>
 
       {/* Auth Modal */}

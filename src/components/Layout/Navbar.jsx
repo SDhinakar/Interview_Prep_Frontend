@@ -16,7 +16,7 @@ const Navbar = () => {
                         className="flex items-center gap-2"
                     >
                         <span className="text-lg font-extrabold bg-gradient-to-r from-[#FF9324] to-[#e99a4b] bg-clip-text text-transparent">
-                            Interview Prep AI
+                            PrepWiz
                         </span>
                     </Link>
 
