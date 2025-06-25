@@ -7,7 +7,7 @@ import DashboardLayout from "../../components/Layout/DashboardLayout";
 import { HiSpeakerWave, HiSpeakerXMark, HiMicrophone } from "react-icons/hi2";
 import { toast } from "react-hot-toast";
 import SpinnerLoader from "../../components/Loader/SpinnerLoader";
-import { ClipLoader } from "react-spinners";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const TestPage = () => {
   const { sessionId } = useParams();
