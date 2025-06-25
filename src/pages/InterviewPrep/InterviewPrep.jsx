@@ -26,19 +26,38 @@ const InterviewPrep = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   const fetchSessionDetailsById = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const response = await axiosInstance.get(API_PATHS.SESSION.GET_BY_ID(sessionId));
-      if (response.data?.session) {
-        setSession(response.data.session);
+  setIsLoading(true);
+  try {
+    const response = await axiosInstance.get(API_PATHS.SESSION.GET_BY_ID(sessionId));
+
+    if (response.data?.session) {
+      setSession(response.data.session);
+    } else {
+      // 💡 If session not found, create it on the fly
+      const createRes = await axiosInstance.post(API_PATHS.SESSION.CREATE, {
+        sessionId,
+        role: "Untitled Role",
+        experience: "0",
+        topicToFocus: "general",
+        description: "",
+      });
+
+      if (createRes.data?.session) {
+        setSession(createRes.data.session);
+        toast.success("New test session created!");
+      } else {
+        throw new Error("Failed to create new session");
       }
-    } catch (error) {
-      setErrorMsg(error.response?.data?.message || "Failed to load session");
-      toast.error(error.response?.data?.message || "Failed to load session details");
-    } finally {
-      setIsLoading(false);
     }
-  }, [sessionId]);
+  } catch (error) {
+    const msg = error.response?.data?.message || error.message || "Failed to load session";
+    setErrorMsg(msg);
+    toast.error(msg);
+  } finally {
+    setIsLoading(false);
+  }
+}, [sessionId]);
+
 
   const generateMoreQuestions = async () => {
     try {

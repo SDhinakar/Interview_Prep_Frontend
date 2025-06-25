@@ -17,3 +17,7 @@ export const validateEmail = (email) => {
     
     return initials.substring(0,2);
   };
+
+export const generateSessionId = () => {
+  return "sess-" + Math.random().toString(36).substring(2, 10);
+};

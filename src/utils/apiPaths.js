@@ -5,19 +5,19 @@ export const API_PATHS = {
     LOGIN: '/api/auth/login',
     SIGNUP: '/api/auth/register',
     REGISTER: '/api/auth/register',
-    ME: '/api/auth/profile',
-    LOGOUT: '/api/auth/logout'
+    LOGOUT: '/api/auth/logout',
+    ME: '/api/auth/me'
   },
-  
+
   IMAGE: {
     UPLOAD_IMAGE: "/api/auth/upload-image"
   },
-  
+
   AI: {
     GENERATE_QUESTIONS: "/api/ai/generate-questions",
     GENERATE_EXPLANATION: "/api/ai/generate-explanation"
   },
-  
+
   SESSION: {
     CREATE: '/api/sessions/create',
     GET_ALL: '/api/sessions/my-sessions',
@@ -25,7 +25,7 @@ export const API_PATHS = {
     GET_ONE: (id) => `/api/sessions/${id}`,
     DELETE: (id) => `/api/sessions/${id}`,
   },
-  
+
   QUESTION: {
     ADD_TO_SESSION: "/api/questions/add",
     PIN: (id) => `/api/questions/${id}/pin`,

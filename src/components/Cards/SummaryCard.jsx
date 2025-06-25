@@ -1,43 +1,53 @@
-import React from 'react';
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import { generateSessionId } from "../../utils/helper"; // write this if not already
 
 const SummaryCard = ({
   colors,
-  role = 'Untitled Role',
-  topicsToFocus = '',
-  experience = '',
-  questions = 0, 
-  description = '',
-  lastUpdated = '',
+  role = "Untitled Role",
+  topicsToFocus = "",
+  experience = "",
+  questions = 0,
+  description = "",
+  lastUpdated = "",
+  sessionId,
   onSelect = () => {},
-  onDelete = () => {}
+  onDelete = () => {},
 }) => {
-  // Generate initials from role name
+  const navigate = useNavigate();
+
   const initials = role
-    .split(' ')
-    .map(word => word[0] || '')
-    .join('')
+    .split(" ")
+    .map((word) => word[0] || "")
+    .join("")
     .toUpperCase()
     .substring(0, 2);
 
-  // Format topics display
-  const formattedTopics = topicsToFocus
-    .split(',')
-    .slice(0, 3)
-    .join(', ');
+  const formattedTopics = topicsToFocus.split(",").slice(0, 3).join(", ");
+  const formattedDate = lastUpdated
+    ? moment(lastUpdated).format("MMM D, YYYY")
+    : "Not available";
 
-  // Format last updated date
-  const formattedDate = lastUpdated 
-    ? moment(lastUpdated).format('MMM D, YYYY') 
-    : 'Not available';
+  const handleStartTest = (e) => {
+    e.stopPropagation();
+    const newSessionId = generateSessionId();
+    localStorage.setItem("currentSessionId", newSessionId);
+    navigate(`/interview-prep/${newSessionId}/test`, {
+      state: {
+        role,
+        topicsToFocus,
+        experience,
+      },
+    });
+  };
 
   return (
     <div
       className="relative bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group cursor-pointer h-full flex flex-col"
-      style={{ background: colors || '#e8faf5' }}
+      style={{ background: colors || "#e8faf5" }}
       onClick={(e) => {
-        // Only trigger if not clicking on delete button
-        if (!e.target.closest('.delete-button')) {
+        if (!e.target.closest(".delete-button")) {
           onSelect();
         }
       }}
@@ -52,13 +62,13 @@ const SummaryCard = ({
         }}
         aria-label="Delete session"
       >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="16" 
-          height="16" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
           strokeWidth="2"
         >
           <path d="M3 6h18"></path>
@@ -68,12 +78,11 @@ const SummaryCard = ({
 
       {/* Card content */}
       <div className="p-5 flex-grow flex flex-col">
-        {/* Header with initials and role */}
         <div className="flex items-center mb-4">
           <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/90 text-gray-700 text-lg font-bold mr-3 border border-gray-200">
             {initials}
           </div>
-          
+
           <div className="flex flex-col">
             <h3 className="text-lg font-bold text-gray-900 line-clamp-1">
               {role}
@@ -85,35 +94,38 @@ const SummaryCard = ({
             )}
           </div>
         </div>
-        
-        {/* Info pills */}
+
         <div className="flex flex-wrap gap-2 mb-3">
           {experience && (
             <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-200">
-              Exp: {experience} {experience === '1' ? 'Year' : 'Years'}
+              Exp: {experience} {experience === "1" ? "Year" : "Years"}
             </span>
           )}
-          
           <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-200">
             {questions} Q&A
           </span>
-          
           <span className="text-xs bg-white/80 text-gray-700 px-3 py-1 rounded-full border border-gray-200">
             Updated: {formattedDate}
           </span>
         </div>
-        
-        {/* Description */}
+
         {description && (
           <div className="mt-2 flex-grow">
-            <p className="text-sm text-gray-600 line-clamp-3">
-              {description}
-            </p>
+            <p className="text-sm text-gray-600 line-clamp-3">{description}</p>
           </div>
         )}
       </div>
 
-      {/* Hover overlay effect */}
+      {/* Start Test button only */}
+      <div className="px-5 pb-4">
+        <button
+          onClick={handleStartTest}
+          className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded-full"
+        >
+          Start Test
+        </button>
+      </div>
+
       <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
     </div>
   );

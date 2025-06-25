@@ -8,7 +8,8 @@ import SignUp from "./pages/Auth/SignUp";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Home/Dashboard";
 import InterviewPrep from "./pages/InterviewPrep/InterviewPrep";
-
+import TestPage from "./pages/InterviewPrep/TestPage";
+import FeedbackPage from "./pages/InterviewPrep/FeedbackPage";
 
 
 const App = () => {
@@ -28,6 +29,10 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/interview-prep/:sessionId" element={<InterviewPrep />} />
+        <Route path="/interview-prep/:sessionId/test" element={<TestPage />} />
+        <Route path="/interview-prep/:sessionId/feedback" element={<FeedbackPage />} />
+
+
       </Routes>
     </Router>
     </UserContextProvider>
